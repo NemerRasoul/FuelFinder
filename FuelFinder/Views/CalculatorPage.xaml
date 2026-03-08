@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FuelFinder.Views.CalculatorPage"
+             Title="Hitta Bästa Pris"
+             BackgroundColor="Black">
+
+    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+        <Label Text="Valt län:" TextColor="Gray"/>
+        <Label Text="{Binding MainViewModel.SelectedCounty.Name}" TextColor="BlueViolet" FontAttributes="Bold"/>
+    </HorizontalStackLayout>
+
+    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,20">
+        <Label Text="Bränsle:" TextColor="Gray"/>
+        <Label Text="{Binding MainViewModel.SelectedFuelType}" TextColor="BlueViolet" FontAttributes="Bold"/>
+    </HorizontalStackLayout>
+
+    <VerticalStackLayout Padding="30" Spacing="20">
+        <Label Text="Bästa priset nära dig" 
+               FontSize="26" 
+               TextColor="White" 
+               HorizontalOptions="Center" 
+               FontAttributes="Bold"/>
+
+        <Label Text="Antal liter du vill tanka:" TextColor="Gray" Margin="0,10,0,0"/>
+
+        <Entry Placeholder="T.ex. 50" 
+               Text="{Binding LitersToFill}" 
+               Keyboard="Numeric" 
+               TextColor="White" 
+               BackgroundColor="Black"
+               PlaceholderColor="DimGray"/>
+
+        <Button Text="Hitta billigaste station" 
+                Command="{Binding FindBestPriceCommand}" 
+                BackgroundColor="BlueViolet" 
+                TextColor="White"
+                HeightRequest="50"
+                CornerRadius="10"/>
+
+        <Border Stroke="LawnGreen" 
+                StrokeThickness="1" 
+                BackgroundColor="Black"
+                Padding="20" 
+                StrokeShape="RoundRectangle 15"
+                Margin="0,20">
+            <Label Text="{Binding BestStationResult}" 
+                   TextColor="White" 
+                   FontSize="18" 
+                   HorizontalTextAlignment="Center"
+                   LineHeight="1.5"/>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

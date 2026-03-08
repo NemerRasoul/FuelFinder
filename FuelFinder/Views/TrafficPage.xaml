@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FuelFinder.Views.TrafficPage"
+             Title="Trafik"
+             BackgroundColor="Black">
+
+    <Grid RowDefinitions="Auto, *">
+
+        <SearchBar Grid.Row="0"
+                   Placeholder="Sök efter ort, väg eller händelse..."
+                   Text="{Binding TrafficSearchText}"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   BackgroundColor="#111111"
+                   Margin="10" />
+
+        <RefreshView Grid.Row="1"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding LoadTrafficCommand}">
+            
+            
+
+            <CollectionView ItemsSource="{Binding TrafficMessages}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Border BackgroundColor="{Binding BackgroundColor}"
+                                    StrokeShape="RoundRectangle 10"
+                                    Padding="15">
+                                <VerticalStackLayout Spacing="5">
+
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding Title}" 
+                                               TextColor="{Binding TextColor}" 
+                                               FontSize="16" 
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+
+                                        <Border BackgroundColor="{Binding TextColor}" 
+                                                Padding="5,2" 
+                                                StrokeShape="RoundRectangle 5">
+                                            <Label Text="{Binding PriorityText}" 
+                                                   FontSize="10" 
+                                                   TextColor="White" 
+                                                   FontAttributes="Bold"/>
+                                        </Border>
+                                    </HorizontalStackLayout>
+
+                                    <Label Text="{Binding Description}" 
+                                           TextColor="DarkSlateGray" 
+                                           FontSize="14"/>
+
+                                    <HorizontalStackLayout Spacing="5" Margin="0,5,0,0">
+                                        <Label Text="Tid:" FontSize="12" TextColor="Gray" />
+                                        <Label Text="{Binding FormattedTime}" TextColor="Gray" FontSize="12"/>
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
