@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FuelFinder.Views.MapPage"
+             xmlns:map="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+             Title="Karta">
+    <Grid RowDefinitions="*, Auto">
+
+        <map:MapControl x:Name="mapControl"
+                        Grid.Row="0"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"/>
+
+        <Border Grid.Row="1"
+               BackgroundColor="#CC000000"
+               Padding="8,4">
+
+            <Label x:Name="CoordLabel"
+                   Text="Click the map to see coordinates"
+                   TextColor="White"
+                   FontSize="13"
+                   HorizontalOptions="Center"/>
+        </Border>
+
+    </Grid>
+
+</ContentPage>

@@ -1,12 +1,12 @@
 ﻿using FuelFinder.Application.Interfaces;
+using FuelFinder.Application.Services;
 using FuelFinder.Domain.Interfaces;
 using FuelFinder.Infrastructure.Repositories;
-using FuelFinder.Application.Services;
 using FuelFinder.ViewModels;
-
 using FuelFinder.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace FuelFinder
 {
@@ -20,11 +20,14 @@ namespace FuelFinder
 
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddTransient<MapPage>();
 
 
 
@@ -32,7 +35,7 @@ namespace FuelFinder
             // ==================================================== ny här
 
             
-            // Vi säger: "När någon ber om IUserRepository, ge dem UserRepository-klassen"
+            // När någon ber om IUserRepository ge dem UserRepository-klassen
             builder.Services.AddSingleton<IUserRepository>(new UserRepository(connectionString));
 
 
@@ -40,18 +43,23 @@ namespace FuelFinder
             new FuelRepository(fileName => FileSystem.OpenAppPackageFileAsync(fileName))
             );
 
-            // 3. Registrera APPLICATION (Tjänster/Logik)
+            //   APPLICATION 
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<IFuelService, FuelService>();
-            builder.Services.AddSingleton<IWeatherService, WeatherService>();
+
+            // builder.Services.AddSingleton<IWeatherService, WeatherService>(); 
+
+            // Använder en singleton instans
+            builder.Services.AddSingleton<IWeatherService>(WeatherService.Instance);
+
             builder.Services.AddSingleton<ITrafficService, TrafficService>();
 
-            // 4. Registrera VIEWMODELS
+            //   VIEWMODELS
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddTransient<TrafficViewModel>();
             builder.Services.AddTransient<CalculatorViewModel>();
 
-            // 5. Registrera VIEWS (Sidor)
+            //   VIEWS 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<TrafficPage>();
             builder.Services.AddTransient<CalculatorPage>();

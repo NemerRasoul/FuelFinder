@@ -11,14 +11,29 @@ namespace FuelFinder.Application.Services
 {
     public class WeatherService : IWeatherService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+       // private readonly HttpClient _httpClient = new HttpClient();
 
-        public WeatherService() 
+        private static WeatherService _instance; // Singleton-instans
+
+        private WeatherService() // private = ingen kan göra en instans av denna klass utifrån, den är singleton
         {
             // SMHI kräver en "user agent" för att tillåta anropet
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "FuelFinderApp/1.0");
         }
 
+        public static WeatherService Instance 
+        {
+            get 
+            {
+                if (_instance == null) 
+                {
+                    _instance = new WeatherService();
+                }
+                return _instance;
+            }
+        }
+
+        private readonly HttpClient _httpClient = new HttpClient();
         public async Task<(double Temp, string Warning)> GetWeatherAsync(double lat, double lon) 
         {
             try 

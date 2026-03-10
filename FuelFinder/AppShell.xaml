@@ -40,6 +40,11 @@
                       ContentTemplate="{DataTemplate views:FuelLogPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Karta" Icon="map.png">
+        <ShellContent Route="MapPage"
+                      ContentTemplate="{DataTemplate views:MapPage}" />
+    </FlyoutItem>
+
 </Shell>
     
     
