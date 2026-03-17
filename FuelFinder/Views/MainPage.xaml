@@ -5,74 +5,60 @@
              x:Class="FuelFinder.Views.MainPage"
              Title="Bensinpriser"
              BackgroundColor="Black">
-   
 
-    <VerticalStackLayout>
-        <Button Text="Välj Län"
-                Clicked="OnSelectCountyClicked"
-                BackgroundColor="BlueViolet"
-                TextColor="White"
-                Margin="10" />
 
-        <SearchBar Placeholder="Sök stad..."
-                   Text="{Binding SearchText}"
-                   TextChanged="OnSearchTextChanged"
-                   SearchCommand="{Binding LoadDataCommand}"
-                   TextColor="White"
-                   PlaceholderColor="Gray"
-                   Margin="10" />
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
 
-        <Border BackgroundColor="#333333"
-                Margin="10"
-                Padding="10"
-                StrokeShape="RoundRectangle 10"
-                Stroke="Transparent">
+        <Button Grid.Row="0" Text="Välj Län"
+            Clicked="OnSelectCountyClicked"
+            BackgroundColor="BlueViolet"
+            TextColor="White"
+            Margin="10" />
 
+        <SearchBar Grid.Row="1" Placeholder="Sök stad..."
+               Text="{Binding SearchText}"
+               SearchCommand="{Binding LoadDataCommand}"
+               TextColor="White"
+               PlaceholderColor="Gray"
+               Margin="10" />
+
+        <Border Grid.Row="2" BackgroundColor="Black"
+            Margin="10" Padding="10"
+            StrokeShape="RoundRectangle 10"
+            Stroke="Transparent">
             <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                <Label Text="{Binding WeatherInfo}"
-                       TextColor="White"
-                       FontAttributes="Bold" />
-
-                <Label Text="{Binding WeatherWarning}"
-                       TextColor="Yellow"
-                       FontAttributes="Bold" />
+                <Label Text="{Binding WeatherInfo}" TextColor="White" FontAttributes="Bold" />
+                <Label Text="{Binding WeatherWarning}" TextColor="Yellow" FontAttributes="Bold" />
             </HorizontalStackLayout>
         </Border>
 
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                     Command="{Binding LoadDataCommand}">
-
+        <RefreshView Grid.Row="3"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding LoadDataCommand}">
+            
             <VerticalStackLayout>
                 <Picker Title="Välj bränsle"
-                        ItemsSource="{Binding FuelTypes}"
-                        SelectedItem="{Binding SelectedFuelType}"
-                        TextColor="White"
-                        TitleColor="Gray"
-                        BackgroundColor="#333"
-                        Margin="10"/>
-
+                    ItemsSource="{Binding FuelTypes}"
+                    SelectedItem="{Binding SelectedFuelType}"
+                    TextColor="White"
+                    TitleColor="Gray"
+                    BackgroundColor="Black"
+                    Margin="10"/>
+                
                 <CollectionView ItemsSource="{Binding Stations}" HeightRequest="500">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <VerticalStackLayout Padding="10">
-                                <Label Text="{Binding Name}"
-                                       TextColor="White"
-                                       FontAttributes="Bold" />
+                                <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" />
+                                <Label Text="{Binding Price}" TextColor="LawnGreen" FontAttributes="Bold" />
+                                <Label Text="{Binding StatusText}" TextColor="Red" FontSize="12" FontAttributes="Italic" />
                                 
-                                <Label Text="{Binding Price}"
-                                       TextColor="LawnGreen"
-                                       FontAttributes="Bold" />
-                                
-                                <Label Text="{Binding StatusText}" 
-                                       TextColor="Red" 
-                                       FontSize="12" 
-                                       FontAttributes="Italic"
-                                       VerticalOptions="Center"/>
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </VerticalStackLayout>
         </RefreshView>
-    </VerticalStackLayout>
+
+    </Grid>
 </ContentPage>

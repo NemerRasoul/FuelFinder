@@ -21,10 +21,10 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(countyPage);
     }
 
-    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    /*private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
         var vm = BindingContext as MainViewModel;
 
         vm?.FilterStations();
-    }
+    }*/
 }

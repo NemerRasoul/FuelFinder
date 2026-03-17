@@ -40,7 +40,7 @@ namespace FuelFinder.Application.Services
             {
                 string url = $"https://henrikhjelm.se/api/getdata.php?lan={urlName}";
 
-                // LÖSNINGEN: Läs in som JsonElement så kraschar inte appen på siffran "created_at_unix"
+                // LÖSNINGEN: Läs in som JsonElement så kraschar inte appen på "created_at_unix"
                 var response = await _httpClient.GetFromJsonAsync<Dictionary<string, JsonElement>>(url);
 
                 if (response != null)
@@ -74,18 +74,18 @@ namespace FuelFinder.Application.Services
                     continue;
                 }
 
-                // 3. BRÄNSLEFILTER: Kolla att det är rätt bränsle (t.ex. __95)
+                // BRÄNSLEFILTER: Kolla att det är rätt bränsle (t.ex. __95)
                 if (!key.EndsWith($"__{fuelType}", StringComparison.OrdinalIgnoreCase))
                     continue;
 
-                // SÖKFILTER: Om användaren har skrivit något i sökfältet
+                // SÖKFILTER
                 if (!string.IsNullOrWhiteSpace(searchCity) && !key.Contains(searchCity, StringComparison.OrdinalIgnoreCase))
                     continue;
 
                 string price = "0";
                 bool isLive = false;
 
-                // 5. PRIORITERA LIVE-DATA
+                //  PRIORITERA LIVE-DATA
                 if (liveData.TryGetValue(key, out string livePrice) &&
                     !string.IsNullOrWhiteSpace(livePrice) &&
                     livePrice != "0") //&&
@@ -102,7 +102,7 @@ namespace FuelFinder.Application.Services
                 }
 
                 
-                if (price != "0" && !string.IsNullOrEmpty(price))
+                if (!string.IsNullOrEmpty(price))
                 {
                     finalStations.Add(new FuelStation
                     {
@@ -115,8 +115,8 @@ namespace FuelFinder.Application.Services
             }
 
             
-            // Om API:et och Fallback-filen har lite olika stavning på Länets namn, 
-            // grupperar vi dem på det städade namnet och prioriterar Live-priset!
+            // Om API:et och Fallback-filen har lite olika stavning på länets namn 
+            // grupperar vi dem på det städade namnet och prioriterar live priset
             var cleanedStations = finalStations
                .GroupBy(s => s.Name)
                .Select(group => group.OrderByDescending(s => s.IsLive).First())

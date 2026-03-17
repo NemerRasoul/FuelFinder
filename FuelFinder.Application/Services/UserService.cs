@@ -57,6 +57,7 @@ namespace FuelFinder.Application.Services
             {
                 UserName = username,
                 Password = password,
+                IsAdmin = username == "admin",
                 TotalPoints = 0,
                 FuelLogs = new List<FuelLog>()
             };

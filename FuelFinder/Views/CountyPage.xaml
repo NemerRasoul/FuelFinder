@@ -9,13 +9,17 @@
         <CollectionView ItemsSource="{Binding Counties}"
                         SelectionMode="Single"
                         SelectionChanged="OnCountySelected">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="15">
+                    <StackLayout 
+                        Padding="15">
+                        
                     <Label Text="{Binding Name}"
                                TextColor="White"
                                FontSize="18"
                                FontAttributes="Bold"
+                           
                        ></Label>
                     </StackLayout>
                 </DataTemplate>

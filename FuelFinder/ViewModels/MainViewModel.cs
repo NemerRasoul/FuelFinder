@@ -111,38 +111,71 @@ namespace FuelFinder.ViewModels
 
         public async Task LoadDataAsync()
         {
-            if (SelectedCounty == null) return;
+            Console.WriteLine($"[DEBUG] LoadDataAsync: SelectedCounty={SelectedCounty?.Name ?? "NULL"}");
 
-            var weather = await _weatherService.GetWeatherAsync(SelectedCounty.Latitude, SelectedCounty.Longitude);
-            WeatherInfo = $"{SelectedCounty.Name} Temperatur: {weather.Temp} C";
-            WeatherWarning = weather.Warning;
+            if (SelectedCounty == null)
+            {
+                return;
+            }
 
             IsRefreshing = true;
 
-            var prices = await _fuelService.GetPricesAsync(SelectedCounty.UrlName, SelectedFuelType, SearchText);
+            var weatherTask = _weatherService.GetWeatherAsync(SelectedCounty.Latitude, SelectedCounty.Longitude);
+            var pricesTask = _fuelService.GetPricesAsync(SelectedCounty.UrlName, SelectedFuelType, SearchText);
+            await Task.WhenAll(weatherTask, pricesTask);
+
+            var weather = weatherTask.Result;
+            var prices = pricesTask.Result;
+
+            WeatherInfo = $"{SelectedCounty.Name} Temperatur: {weather.Temp} C";
+            WeatherWarning = weather.Warning;
+           
+
+            Console.WriteLine($"[DEBUG] Antal stationer: {prices?.Count() ?? 0}");
             _allStations = prices.ToList();
 
-            Stations.Clear();
-            foreach (var station in prices) Stations.Add(station);
 
-            IsRefreshing = false;
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Stations.Clear();
+               
+                foreach (var station in prices) Stations.Add(station);
+
+                IsRefreshing = false;
+            });
+            
         }
 
         public void FilterStations()
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
+            var toShow = string.IsNullOrWhiteSpace(SearchText)
+            ? _allStations
+            : _allStations.Where(s => s.Name.Contains(SearchText,
+            StringComparison.OrdinalIgnoreCase)).ToList();
+
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 Stations.Clear();
-                foreach (var s in _allStations) Stations.Add(s);
-                return;
-            }
+                foreach (var s in toShow) Stations.Add(s);
+            });
+
+
+            /* if (string.IsNullOrWhiteSpace(SearchText))
+             {
+                 Stations.Clear();
+                 foreach (var s in _allStations) Stations.Add(s);
+                 return;
+             } 
 
             var filtered = _allStations
                 .Where(s => s.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
-            Stations.Clear();
+             Stations.Clear();
             foreach (var s in filtered) Stations.Add(s);
+            */
+
+
         }
     }
 }

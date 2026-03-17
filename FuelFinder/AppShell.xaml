@@ -20,7 +20,7 @@
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Bränsle"  FlyoutIcon="fuel.png" FlyoutDisplayOptions="AsSingleItem">
+    <FlyoutItem Title="Bränsle" FlyoutIcon="gas.png" FlyoutDisplayOptions="AsSingleItem">
         <ShellContent Route="MainPage" 
                       ContentTemplate="{DataTemplate views:MainPage}"/>
     </FlyoutItem>
@@ -35,7 +35,7 @@
                       ContentTemplate="{DataTemplate views:CalculatorPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Loggbok" Icon="logs.jpg">
+    <FlyoutItem Title="Loggbok" Icon="note.png">
         <ShellContent Route="FuelLogPage"
                       ContentTemplate="{DataTemplate views:FuelLogPage}" />
     </FlyoutItem>

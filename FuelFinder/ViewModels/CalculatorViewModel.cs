@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuelFinder.ViewModels
 {
-    internal class CalculatorViewModel : BaseViewModel
+    public class CalculatorViewModel : BaseViewModel
     {
         public MainViewModel MainViewModel => _mainViewModel;
         private readonly MainViewModel _mainViewModel;

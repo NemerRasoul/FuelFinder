@@ -1,4 +1,5 @@
-﻿using FuelFinder.Application.Interfaces;
+﻿using FuelFinder.Application.Factories;
+using FuelFinder.Application.Interfaces;
 using FuelFinder.Application.Services;
 using FuelFinder.Domain.Interfaces;
 using FuelFinder.Infrastructure.Repositories;
@@ -20,7 +21,7 @@ namespace FuelFinder
 
             builder
                 .UseMauiApp<App>()
-                .UseSkiaSharp()
+                .UseSkiaSharp() 
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -31,10 +32,11 @@ namespace FuelFinder
 
 
 
-            var connectionString = builder.Configuration.GetConnectionString("MongoDB");
-            // ==================================================== ny här
+            var connectionString = builder.Configuration.GetConnectionString("MongoDB") 
+                ?? Constants.MongoDBConnectionString; // använder antingen connection string från user secrets eller fallback till konstanten (fix för emulatorn där user secrets inte funkar)
 
-            
+
+
             // När någon ber om IUserRepository ge dem UserRepository-klassen
             builder.Services.AddSingleton<IUserRepository>(new UserRepository(connectionString));
 
@@ -53,6 +55,7 @@ namespace FuelFinder
             builder.Services.AddSingleton<IWeatherService>(WeatherService.Instance);
 
             builder.Services.AddSingleton<ITrafficService, TrafficService>();
+            builder.Services.AddSingleton<ITrafficMessageFactory, TrafficMessageFactory>();
 
             //   VIEWMODELS
             builder.Services.AddSingleton<MainViewModel>();

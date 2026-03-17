@@ -44,6 +44,7 @@
                 Padding="20" 
                 StrokeShape="RoundRectangle 15"
                 Margin="0,20">
+            
             <Label Text="{Binding BestStationResult}" 
                    TextColor="White" 
                    FontSize="18" 

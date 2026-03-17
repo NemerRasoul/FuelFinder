@@ -12,7 +12,7 @@
                         HorizontalOptions="FillAndExpand"/>
 
         <Border Grid.Row="1"
-               BackgroundColor="#CC000000"
+               BackgroundColor="Black"
                Padding="8,4">
 
             <Label x:Name="CoordLabel"

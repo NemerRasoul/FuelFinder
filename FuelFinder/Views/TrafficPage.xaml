@@ -12,7 +12,7 @@
                    Text="{Binding TrafficSearchText}"
                    TextColor="White"
                    PlaceholderColor="Gray"
-                   BackgroundColor="#111111"
+                   BackgroundColor="Black"
                    Margin="10" />
 
         <RefreshView Grid.Row="1"

@@ -21,7 +21,7 @@ namespace FuelFinder.Domain.Entities.Models
         public DateTime Date { get; set; } 
         public double Consumption { get; set; }
 
-        // Poängsystem (extra)
+        // Poängsystem 
         public int PointsEarned { get; set; }
     }
 
@@ -30,6 +30,7 @@ namespace FuelFinder.Domain.Entities.Models
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string UserName { get; set; }
         public string Password { get; set; }
+        public bool IsAdmin { get; set; } = false;
         public List<FuelLog> FuelLogs { get; set; } = new List<FuelLog>();
         public int TotalPoints { get; set; }
     }

@@ -15,7 +15,7 @@ namespace FuelFinder.Application.Services
 
         private static WeatherService _instance; // Singleton-instans
 
-        private WeatherService() // private = ingen kan göra en instans av denna klass utifrån, den är singleton
+        private WeatherService() 
         {
             // SMHI kräver en "user agent" för att tillåta anropet
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "FuelFinderApp/1.0");
@@ -73,7 +73,7 @@ namespace FuelFinder.Application.Services
                 double temp = tempElement.GetProperty("values")[0].GetDouble();
                
 
-                //algoritm för halkvarning
+                //simpel algoritm för halkvarning
                 string warning = temp <= 0 ? "Varning: Risk för halka!" : "Väglag: OK";
                 return (temp, warning);
             }
