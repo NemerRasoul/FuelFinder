@@ -21,6 +21,19 @@ public partial class FuelLogPage : ContentPage
         }
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_userService.CurrentUser == null)
+        {
+            await DisplayAlert("Inloggning krävs",
+                "OBS! Du måste vara inloggad för att använda bränsleloggen. VARNING: Om du försöker använda bränsleloggen utan inlogg kommer Appen sluta fungera.",
+                "OK");
+           
+        }
+    }
+
     private async void OnSaveLogClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(StationEntry.Text) ||

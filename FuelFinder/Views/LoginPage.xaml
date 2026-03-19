@@ -33,8 +33,17 @@
                     BackgroundColor="DimGrey" 
                     TextColor="White" />
 
+            <Button Text="Fortsätt som gäst"
+                    Clicked="OnGuestClicked"
+                    BackgroundColor="#B93707"
+                    TextColor="White"
+                    BorderColor="Gray"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    HeightRequest="50"/>
+
             <Label x:Name="ErrorLabel" 
-                   TextColor="White" 
+                   TextColor="Red" 
                    HorizontalOptions="Center" />
 
         </VerticalStackLayout>

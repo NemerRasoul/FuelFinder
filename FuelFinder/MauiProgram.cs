@@ -38,12 +38,20 @@ namespace FuelFinder
             builder.Services.AddSingleton<HttpClient>();
 
             // När någon ber om IUserRepository ge dem UserRepository-klassen
-            builder.Services.AddSingleton<IUserRepository>(new UserRepository(connectionString));
+            if (!string.IsNullOrWhiteSpace(connectionString))
+            {
+                builder.Services.AddSingleton<IUserRepository>(new UserRepository(connectionString));
+            }
+            else 
+            {
+                // Gästläge: ingen databasanslutning
+                builder.Services.AddSingleton<IUserRepository, GuestUserRepository>();
+            }
 
 
-            builder.Services.AddSingleton<IFuelStorage>(
-            new FuelRepository(fileName => FileSystem.OpenAppPackageFileAsync(fileName))
-            );
+                builder.Services.AddSingleton<IFuelStorage>(
+                new FuelRepository(fileName => FileSystem.OpenAppPackageFileAsync(fileName))
+                );
 
             //   APPLICATION 
             builder.Services.AddSingleton<IUserService, UserService>();

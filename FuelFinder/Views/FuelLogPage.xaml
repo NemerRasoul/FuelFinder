@@ -4,7 +4,7 @@
              x:Class="FuelFinder.Views.FuelLogPage"
              Title="Tankningslogg">
     <VerticalStackLayout Padding="20" Spacing="15" BackgroundColor="Black">
-        
+
         <Label 
             Text="Logga ny tankning"
             FontSize="24"

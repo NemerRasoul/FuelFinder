@@ -29,7 +29,7 @@ namespace FuelFinder.Application.Services
         {
             try
             {
-                string url = "http://api.sr.se/api/v2/traffic/messages?format=json&pagination=false";
+                string url = "https://api.sr.se/api/v2/traffic/messages?format=json&pagination=false";
 
                 var response = await _httpClient.GetAsync(url);
 

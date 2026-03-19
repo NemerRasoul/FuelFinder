@@ -44,4 +44,12 @@ public partial class LoginPage : ContentPage
             ErrorLabel.Text = message;
         }
     }
+
+    private async void OnGuestClicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Välkommen!", "Du är inloggad som gäst. Observera att vissa funktioner kan vara begränsade (Loggsystem, Pins på kartan kanske inte fungerar som dem ska).", "OK");
+        _appShell.BindingContext = null;
+        Microsoft.Maui.Controls.Application.Current.MainPage = _appShell;
+
+    }
 }
