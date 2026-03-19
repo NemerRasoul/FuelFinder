@@ -32,8 +32,8 @@ namespace FuelFinder
 
 
 
-            var connectionString = builder.Configuration.GetConnectionString("MongoDB") 
-                ?? Constants.MongoDBConnectionString; // använder antingen connection string från user secrets eller fallback till konstanten (fix för emulatorn där user secrets inte funkar)
+            var connectionString = builder.Configuration.GetConnectionString("MongoDB")
+                ?? Constant.MongoDBConnectionString; // använder antingen connection string från user secrets eller fallback till konstanten (fix för emulatorn där user secrets inte funkar)
 
             builder.Services.AddSingleton<HttpClient>();
 
