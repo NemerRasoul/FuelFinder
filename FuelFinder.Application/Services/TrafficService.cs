@@ -9,16 +9,19 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using FuelFinder.Application.Factories;
 
 namespace FuelFinder.Application.Services
 {
     public class TrafficService : ITrafficService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
-        private readonly ITrafficMessageFactory _factory;
+       // private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
+        private readonly TrafficMessageCreator _factory;
 
-        public TrafficService(ITrafficMessageFactory factory)
+        public TrafficService(HttpClient httpClient, TrafficMessageCreator factory)
         {
+            _httpClient = httpClient;
             _factory = factory;
         }
 

@@ -19,7 +19,6 @@
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding LoadTrafficCommand}">
             
-            
 
             <CollectionView ItemsSource="{Binding TrafficMessages}">
                 <CollectionView.ItemTemplate>

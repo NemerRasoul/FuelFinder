@@ -12,11 +12,13 @@ namespace FuelFinder.Application.Services
 {
     public class FuelService : IFuelService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+       // private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
         private readonly IFuelStorage _fuelStorage;
 
-        public FuelService(IFuelStorage fuelStorage)
+        public FuelService(HttpClient httpClient, IFuelStorage fuelStorage)
         {
+            _httpClient = httpClient;
             _fuelStorage = fuelStorage;
         }
 
@@ -40,7 +42,7 @@ namespace FuelFinder.Application.Services
             {
                 string url = $"https://henrikhjelm.se/api/getdata.php?lan={urlName}";
 
-                // LÖSNINGEN: Läs in som JsonElement så kraschar inte appen på "created_at_unix"
+                // Läs in som JsonElement så kraschar inte appen på "created_at_unix"
                 var response = await _httpClient.GetFromJsonAsync<Dictionary<string, JsonElement>>(url);
 
                 if (response != null)
@@ -102,7 +104,7 @@ namespace FuelFinder.Application.Services
                 }
 
                 
-                if (!string.IsNullOrEmpty(price))
+                if (price != "0" && !string.IsNullOrEmpty(price))
                 {
                     finalStations.Add(new FuelStation
                     {
@@ -116,11 +118,12 @@ namespace FuelFinder.Application.Services
 
             
             // Om API:et och Fallback-filen har lite olika stavning på länets namn 
-            // grupperar vi dem på det städade namnet och prioriterar live priset
+            // grupperar vi dem på det städade namnet och prioriterar live priset    
             var cleanedStations = finalStations
                .GroupBy(s => s.Name)
                .Select(group => group.OrderByDescending(s => s.IsLive).First())
                .OrderBy(s => s.Name)
+               .OrderBy(s => s.Price)
                .ToList();
 
             return cleanedStations;

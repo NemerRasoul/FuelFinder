@@ -27,7 +27,7 @@ namespace FuelFinder.Application.Services
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 return false;
 
-           var user = await _userRepository.GetUserByUsernameAsync(username);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
           
 
             if (user != null && user.Password == password) 
@@ -43,15 +43,12 @@ namespace FuelFinder.Application.Services
             if (string.IsNullOrWhiteSpace(username) || password.Length < 4)
                 return (false, "Användarnamn krävs och lösenordet måste vara minst 4 tecken.");
 
-            
             var existingUser = await _userRepository.GetUserByUsernameAsync(username);
-
 
             if (existingUser != null)
             {
                 return (false, "Användarnamnet är tyvärr redan upptaget.");
             }
-
             
             var newUser = new User
             {

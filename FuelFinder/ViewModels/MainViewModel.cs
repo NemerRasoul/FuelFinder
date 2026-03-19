@@ -62,7 +62,7 @@ namespace FuelFinder.ViewModels
             _weatherService = weatherService;
             _fuelService = fuelService;
             LoadDataCommand = new Command(async () => await LoadDataAsync());
-            SelectedCounty = Counties[0];
+            SelectedCounty = Counties[0]; // Sörmland som default län
         }
 
         public string SelectedFuelType
@@ -158,24 +158,6 @@ namespace FuelFinder.ViewModels
                 Stations.Clear();
                 foreach (var s in toShow) Stations.Add(s);
             });
-
-
-            /* if (string.IsNullOrWhiteSpace(SearchText))
-             {
-                 Stations.Clear();
-                 foreach (var s in _allStations) Stations.Add(s);
-                 return;
-             } 
-
-            var filtered = _allStations
-                .Where(s => s.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-             Stations.Clear();
-            foreach (var s in filtered) Stations.Add(s);
-            */
-
-
         }
     }
 }

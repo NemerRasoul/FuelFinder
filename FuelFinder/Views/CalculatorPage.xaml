@@ -31,6 +31,11 @@
                BackgroundColor="Black"
                PlaceholderColor="DimGray"/>
 
+        <HorizontalStackLayout Spacing="10">
+            <CheckBox IsChecked="{Binding OnlyLivePrices}" Color="BlueViolet"/>
+            <Label Text="Visa bara live-priser" TextColor="Gray" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
         <Button Text="Hitta billigaste station" 
                 Command="{Binding FindBestPriceCommand}" 
                 BackgroundColor="BlueViolet" 

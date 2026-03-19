@@ -11,8 +11,6 @@ namespace FuelFinder.Application.Services
 {
     public class WeatherService : IWeatherService
     {
-       // private readonly HttpClient _httpClient = new HttpClient();
-
         private static WeatherService _instance; // Singleton-instans
 
         private WeatherService() 
@@ -79,9 +77,7 @@ namespace FuelFinder.Application.Services
             }
             catch (Exception ex) 
             {
-                //return (0, $"Väderdata ej tillgänglig: {ex.Message}");
                 return (0, $"Väderfel: {ex.Message}");
-               
             }
         }
     }

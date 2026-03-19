@@ -20,6 +20,13 @@ namespace FuelFinder.ViewModels
             set => SetProperty(ref _litersToFill, value);
         }
 
+        private bool _onlyLivePrices;
+        public bool OnlyLivePrices
+        {
+            get => _onlyLivePrices;
+            set => SetProperty(ref _onlyLivePrices, value);
+        }
+
         private string _bestStationResult;
         public string BestStationResult
         {
@@ -48,10 +55,20 @@ namespace FuelFinder.ViewModels
                     return;
                 }
 
+                var stations = OnlyLivePrices
+                    ? _mainViewModel.Stations.Where(s => s.IsLive).ToList()
+                    : _mainViewModel.Stations.ToList();
+
+                if (!stations.Any())
+                {
+                    BestStationResult = "Inga live-priser hittades för detta län.";
+                    return;
+                }
+
                 if (double.TryParse(LitersToFill?.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double liters))
                 {
-                   
-                    var cheapestStation = _mainViewModel.Stations
+
+                    var cheapestStation = stations
                         .OrderBy(s => ParsePrice(s.Price))
                         .FirstOrDefault();
 
@@ -60,13 +77,13 @@ namespace FuelFinder.ViewModels
                         double pricePerLiter = ParsePrice(cheapestStation.Price);
                         double totalCost = liters * pricePerLiter;
 
-                       
+
                         BestStationResult = $"I {county.Name} är {cheapestStation.Name} billigast för {fuel}.\n\n" +
                                      $"Pris: {cheapestStation.Price}\n" +
                                      $"Total kostnad ({liters}L): {totalCost:F2} kr";
-                        
+
                     }
-                    
+
                 }
                 else
                 {
@@ -94,82 +111,7 @@ namespace FuelFinder.ViewModels
             }
             return double.MaxValue;
         }
-
-        /*  var cheapestStation = _mainViewModel.Stations
-              .Where(s => !s.Price.Contains("HenrikHjelm") && !s.Price.Contains("http"))
-              .OrderBy(s =>
-              {
-                  string cleanPrice = s.Price.Replace(" kr", "").Replace(",", ".");
-                  if (double.TryParse(cleanPrice, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double p))
-                      return p;
-
-                  return double.MaxValue;
-              })
-              .FirstOrDefault();
-
-          if (cheapestStation != null && double.TryParse(LitersToFill.Replace(",", "."),
-             System.Globalization.NumberStyles.Any,
-             System.Globalization.CultureInfo.InvariantCulture, out double liters))
-          {
-              string cleanPrice = cheapestStation.Price.Replace(" kr", "").Replace(",", ".");
-              double price = double.Parse(cleanPrice, System.Globalization.CultureInfo.InvariantCulture);
-
-              double total = liters * price;
-
-              BestStationResult = $"Bäst för dig: {cheapestStation.Name}\n" +
-                                  $"Pris: {cheapestStation.Price}\n" +
-                                  $"Totalt för {liters} Liter: {total:F2} kr";
-
-          }
-          else 
-          {
-              BestStationResult = "Skriv in hur många liter du vill tanka.";
-          }
-      }
-      catch (Exception ex) 
-      {
-          BestStationResult = $"Kunde inte räkna ut priset, kontrollera siffrorna: {ex.Message}";
-      }*/
     }
-
-            /* private string _result;
-             public string Result
-             {
-                 get => _result;
-                 set => SetProperty(ref _result, value);
-             }
-
-             public string Liters { get; set; }
-             public string Price { get; set; }
-             public Command CalculateCommand { get; }
-
-             public CalculatorViewModel()
-             {
-                 CalculateCommand = new Command(Calculate);
-             }
-
-             private void Calculate()
-             {
-                 try
-                 {
-
-                     if (double.TryParse(Liters, out double liters) && double.TryParse(Price, out double price))
-                     {
-                         double totalCost = liters * price;
-                         Result = $"Det kostar: {totalCost:F2} kr att tanka fullt";
-                     }
-                     else
-                     {
-                         Result = "Vänligen mata in giltiga siffror";
-                     }
-                 }
-                 catch (Exception ex)
-                 {
-                     Result = $"Ett oväntat fel uppsotd vid beräkningen: {ex.Message}";
-
-                 }
-
-             }*/
-        
+       
 }
 

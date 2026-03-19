@@ -7,7 +7,7 @@
     xmlns:views="clr-namespace:FuelFinder.Views" 
     Title="FuelFinder"
     FlyoutBehavior="Flyout">
-    
+
 
     <Shell.FlyoutHeader>
         <VerticalStackLayout Padding="20" BackgroundColor="BlueViolet">
@@ -46,32 +46,3 @@
     </FlyoutItem>
 
 </Shell>
-    
-    
-   <!-- 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" /> 
-    -->
-
-    <!-- 
-    <TabBar>
-        <Tab Title="Bränsle" Icon="fuel.png">
-            <ShellContent Route="MainPage" 
-                          ContentTemplate="{DataTemplate views:MainPage}"/>
-        </Tab>
-
-        <Tab Title="Trafik">
-            <ShellContent Route="TrafficPage"
-                          ContentTemplate="{DataTemplate views:TrafficPage}" />
-        </Tab>
-
-        <Tab Title="Kalkylator" Icon="calc.png">
-            <ShellContent Route="CalculatorPage"
-                          ContentTemplate="{DataTemplate views:CalculatorPage}"/>
-        </Tab>
-    </TabBar>
-
-</Shell>
-    -->

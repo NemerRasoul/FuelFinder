@@ -6,10 +6,10 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FuelFinder.Application.Interfaces
+namespace FuelFinder.Application.Factories
 {
-    public interface ITrafficMessageFactory
+    public abstract class TrafficMessageCreator
     {
-        TrafficMessage Create(JsonElement messageElement);
+        public abstract TrafficMessage Create(JsonElement messageElement);
     }
 }

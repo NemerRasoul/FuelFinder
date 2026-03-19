@@ -35,7 +35,7 @@ namespace FuelFinder
             var connectionString = builder.Configuration.GetConnectionString("MongoDB") 
                 ?? Constants.MongoDBConnectionString; // använder antingen connection string från user secrets eller fallback till konstanten (fix för emulatorn där user secrets inte funkar)
 
-
+            builder.Services.AddSingleton<HttpClient>();
 
             // När någon ber om IUserRepository ge dem UserRepository-klassen
             builder.Services.AddSingleton<IUserRepository>(new UserRepository(connectionString));
@@ -49,13 +49,11 @@ namespace FuelFinder
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<IFuelService, FuelService>();
 
-            // builder.Services.AddSingleton<IWeatherService, WeatherService>(); 
-
             // Använder en singleton instans
             builder.Services.AddSingleton<IWeatherService>(WeatherService.Instance);
 
             builder.Services.AddSingleton<ITrafficService, TrafficService>();
-            builder.Services.AddSingleton<ITrafficMessageFactory, TrafficMessageFactory>();
+            builder.Services.AddSingleton<TrafficMessageCreator, TrafficMessageFactory>();
 
             //   VIEWMODELS
             builder.Services.AddSingleton<MainViewModel>();
@@ -72,19 +70,6 @@ namespace FuelFinder
             builder.Services.AddSingleton<AppShell>();
 
 
-            // =================================================== gammalt neråt
-            /*
-
-             builder.Services.AddSingleton(new MongoService(connectionString));
-
-             builder.Services.AddSingleton<UserService>();
-             builder.Services.AddSingleton<MainViewModel>();
-             builder.Services.AddSingleton<MainPage>();
-             builder.Services.AddTransient<TrafficPage>();
-             builder.Services.AddTransient<CalculatorPage>();
-             builder.Services.AddTransient<LoginPage>();
-
-             */
 
 
 #if DEBUG

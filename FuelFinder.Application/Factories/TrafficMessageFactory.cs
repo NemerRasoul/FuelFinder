@@ -1,5 +1,4 @@
-﻿using FuelFinder.Application.Interfaces;
-using FuelFinder.Domain.Entities.Models;
+﻿using FuelFinder.Domain.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FuelFinder.Application.Factories
 {
-    public class TrafficMessageFactory : ITrafficMessageFactory
+    public class TrafficMessageFactory : TrafficMessageCreator
     {
-        public TrafficMessage Create(JsonElement messageElement)
+        public override TrafficMessage Create(JsonElement messageElement)
         {
             var title = messageElement.GetProperty("title").GetString();
             var desc = messageElement.GetProperty("description").GetString();
