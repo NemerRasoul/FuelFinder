@@ -27,9 +27,9 @@ A .NET MAUI mobile application for finding and comparing fuel prices across Swed
 ### Installation
 1. Clone the repository
 2. Open `FuelFinder.sln` in Visual Studio
-3. >**Note:** The steps below are only if you want to be able to login and use the logsystem and map pins correctly.
-4. In MongoDB Atlas, create a database called `FuelFinderDB` or to whatever you like ( make sure if it's not called **FuelFinderDB
-    to rename it to whatever the name is in FuelFinder.Infrastructure/Repositories/UserRepository.cs ->  var database = client.GetDatabase("your-db-name-here");** )  
+3. > **Note:** The steps below are only if you want to be able to login and use the logsystem and map pins correctly.
+4. In MongoDB Atlas, create a database called `FuelFinderDB` or to whatever you like ( make sure if it's not called **FuelFinderDB** to rename it to whatever the name is in `FuelFinder.Infrastructure/Repositories/UserRepository.cs` →
+   `var database = client.GetDatabase("your-db-name-here");` )
 5. Add your MongoDB connection string via User Secrets (Windows):
 ```json
 {
@@ -38,10 +38,17 @@ A .NET MAUI mobile application for finding and comparing fuel prices across Swed
   }
 }
 ```
-6. For Android: add your MongoDB connection string to `Constant.cs`:
+6. For Android: add your MongoDB connection string to `Constants.cs`:
 ```csharp
 public const string MongoDBConnectionString = "your-connection-string-here";
 ```
 7. Run the project on Android or Windows
 
-> **Note:** A MongoDB Atlas connection string is required for user accounts and fuel logging. Without it, you can still use the app in guest mode to browse fuel prices, weather and traffic. User Secrets only works on Windows — Android requires the connection string in `Constant.cs`.
+> **Note:** A MongoDB Atlas connection string is required for user accounts and fuel logging. Without it, you can still use the app in guest mode to browse fuel prices, weather and traffic. User Secrets only works on Windows — Android requires the connection string in `Constants.cs`.
+
+## 📱 Install on Physical Android Device
+- Enable **Developer Options** on your phone — go to Settings → About Phone → tap **Build Number** 7 times
+- Enable **USB Debugging** in Developer Options
+- Connect your phone via USB
+- In Visual Studio, select your phone from the device dropdown instead of the emulator
+- Hit Run — it installs and runs directly on your phone
