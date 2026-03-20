@@ -39,13 +39,13 @@ A .NET MAUI mobile application for finding and comparing fuel prices across Swed
   }
 }
 ```
-6. For Android: add your MongoDB connection string to `Constants.cs`:
+6. For Android: add your MongoDB connection string to `Constant.cs`:
 ```csharp
 public const string MongoDBConnectionString = "your-connection-string-here";
 ```
 7. Run the project on Android or Windows
 
-> **Note:** A MongoDB Atlas connection string is required for user accounts and fuel logging. Without it, you can still use the app in guest mode to browse fuel prices, weather and traffic. User Secrets only works on Windows — Android requires the connection string in `Constants.cs`.
+> **Note:** A MongoDB Atlas connection string is required for user accounts and fuel logging. Without it, you can still use the app in guest mode to browse fuel prices, weather and traffic. User Secrets only works on Windows — Android requires the connection string in `Constant.cs`.
 
 ## 📱 Install on Physical Android Device
 - Enable **Developer Options** on your phone — go to Settings → About Phone → tap **Build Number** 7 times
