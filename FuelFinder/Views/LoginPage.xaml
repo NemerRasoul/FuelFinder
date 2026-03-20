@@ -6,8 +6,8 @@
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
 
-            <Image Source="fuelfinderblack.png" 
-                   HeightRequest="550" 
+            <Image Source="fuelfinderlogo.png" 
+                   HeightRequest="400" 
                    HorizontalOptions="Center"
                    Aspect="AspectFit" />
 
