@@ -23,7 +23,11 @@ A .NET MAUI mobile application for finding and comparing fuel prices across Swed
 ### Requirements
 - Visual Studio 2022 with MAUI workload installed
 - .NET 9 SDK
-- Android Emulator or physical device
+- Windows PC
+
+- ### Optional
+- Android Emulator (requires Android SDK via Visual Studio)
+- Physical Android device (requires USB debugging enabled)
 
 ### Installation
 1. Clone the repository
