@@ -1,5 +1,5 @@
 # FuelFinder ⛽
-A .NET MAUI mobile application for finding and comparing fuel prices across Swedish counties, with real-time traffic and weather information and a interactive map.
+A .NET MAUI application for finding and comparing fuel prices across Swedish counties, with real-time traffic and weather information and a interactive map.
 
 ## ✨ Main Features
 - **Fuel Prices:** Browse live fuel prices by county and fuel type (95, diesel, ethanol, 98) with automatic fallback to local data if the API is unavailable.
