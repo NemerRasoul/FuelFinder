@@ -11,6 +11,22 @@ A .NET MAUI application for finding and comparing fuel prices across Swedish cou
 - **Map from Mapsui**: Interactive map which you can add pins to by double clicking/double tapping anywhere. Single click/tap shows coordinates.
 - **Guest Mode:** Continue without an account to access fuel prices, weather and traffic. Note: Fuel logging requires a registered account.
 
+### How the app looks
+*(Click the pictures for a more zoomed in version)*
+
+<div align="center">
+  <a href="https://github.com/user-attachments/assets/b5f155f7-7734-4faa-abbc-8ac334c6ebea"><img src="https://github.com/user-attachments/assets/b5f155f7-7734-4faa-abbc-8ac334c6ebea" width="30%" /></a>
+  <a href="https://github.com/user-attachments/assets/e201de04-3f8c-49c7-b687-d1b871b26da2"><img src="https://github.com/user-attachments/assets/e201de04-3f8c-49c7-b687-d1b871b26da2" width="30%" /></a>
+  <a href="https://github.com/user-attachments/assets/2f52fb11-d6bf-43ba-b008-0ab07baa7e2a"><img src="https://github.com/user-attachments/assets/2f52fb11-d6bf-43ba-b008-0ab07baa7e2a" width="30%" /></a>
+</div>
+<br />
+<div align="center">
+  <a href="https://github.com/user-attachments/assets/ab571859-6c3e-486a-99a9-b55f2b74d804"><img src="https://github.com/user-attachments/assets/ab571859-6c3e-486a-99a9-b55f2b74d804" width="30%" /></a>
+  <a href="https://github.com/user-attachments/assets/7ced0619-1b41-4564-9a9d-cd7aeb406f34"><img src="https://github.com/user-attachments/assets/7ced0619-1b41-4564-9a9d-cd7aeb406f34" width="30%" /></a>
+</div>
+
+  
+
 ## 🛠 Tech Stack
 - **Framework:** .NET MAUI (Android & Windows)
 - **Language:** C#
